@@ -42,8 +42,8 @@ const initService = async () => {
     await InitService.initRoles([operatorRole])
 
     await InitService.initRootUser()
-    await InitService.initSupervisorUser()
-    await InitService.initOperatorUser()
+    /* await InitService.initSupervisorUser()
+    await InitService.initOperatorUser() */
 
     await initCustomization()
 }

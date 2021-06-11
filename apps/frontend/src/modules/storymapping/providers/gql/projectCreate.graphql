@@ -1,0 +1,15 @@
+mutation projectCreate($title:String!, $description:String){
+    projectCreate(input: {title: $title, description: $description }){
+        id
+        title
+        description
+        activities {
+            title
+            roles
+            tasks {
+                title
+            }
+        }
+    }
+}
+

@@ -1,0 +1,57 @@
+type Task {
+    title: String
+}
+
+type Activity {
+    title: String
+    roles: [String]
+    tasks: [Task]
+}
+        
+type Project{
+    id: ID!
+    title: String!
+    description: String
+    activities: [Activity]
+    createdAt: String
+}
+
+type ProjectPaginated{
+    totalItems: Int!
+    page: Int!
+    items: [Project!]
+}
+
+type Query {
+    projectFind(id:ID!): Project
+    projectFetch: [Project]
+    projectPaginate( pageNumber: Int, itemsPerPage: Int, search: String, orderBy: String, orderDesc: Boolean): ProjectPaginated  
+}
+
+input TaskInput {
+    title: String
+}
+
+input ActivityInput {
+    title: String
+    roles: [String]
+    tasks: [TaskInput]
+}
+
+input ProjectInput{
+    title: String!
+    description: String
+    activities: [ActivityInput]
+}
+
+type ProjectDelete{
+    id: ID!
+    success: Boolean!
+}
+
+
+type Mutation {
+    projectCreate(input: ProjectInput): Project
+    projectUpdate(id: ID!, input: ProjectInput): Project
+    projectDelete(id: ID!): ProjectDelete!
+}

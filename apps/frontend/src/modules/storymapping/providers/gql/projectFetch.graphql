@@ -1,0 +1,14 @@
+query projectFetch{
+    projectFetch{
+        id
+        title
+        description
+        activities {
+            title
+            roles
+            tasks {
+                title
+            }
+        }
+    }
+}
