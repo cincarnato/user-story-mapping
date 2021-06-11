@@ -14,7 +14,10 @@ const ProjectSchema = new Schema({
     activities: [{
         title: { type: String },
         roles: [{ type: String }],
-        tasks: [{ title: String }]
+        tasks: [{
+            title: String,
+            subtasks: [{ title: String }]
+        }]
     }]
 
 

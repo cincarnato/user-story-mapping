@@ -8,6 +8,9 @@ query projectFind($id:ID!){
             roles
             tasks {
                 title
+                subtasks {
+                    title
+                }
             }
         }
     }

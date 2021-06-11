@@ -8,6 +8,9 @@ query projectFetch{
             roles
             tasks {
                 title
+                subtasks {
+                    title
+                }
             }
         }
     }

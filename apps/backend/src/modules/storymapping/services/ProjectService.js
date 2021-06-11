@@ -84,15 +84,13 @@ export const updateProject = async function (authUser, id, {title, description, 
         {title, description, activities}, 
         {new: true, runValidators: true, context: 'query'},
         (error,doc) => {
-            
             if (error) {
                 if (error.name == "ValidationError") {
                     rejects(new UserInputError(error.message, {inputErrors: error.errors}));
                 }
                 rejects(error)
             } 
-        
-            setTimeout(() => resolve(doc), 1000 )
+            resolve(doc)
         })
     })
 }

@@ -8,6 +8,9 @@ mutation projectCreate($title:String!, $description:String){
             roles
             tasks {
                 title
+                subtasks {
+                    title
+                }
             }
         }
     }

@@ -1,5 +1,10 @@
+type Subtask {
+    title: String
+}
+
 type Task {
     title: String
+    subtasks: [Subtask]
 }
 
 type Activity {
@@ -28,8 +33,13 @@ type Query {
     projectPaginate( pageNumber: Int, itemsPerPage: Int, search: String, orderBy: String, orderDesc: Boolean): ProjectPaginated  
 }
 
+input SubtaskInput {
+    title: String
+}
+
 input TaskInput {
     title: String
+    subtasks: [SubtaskInput]
 }
 
 input ActivityInput {

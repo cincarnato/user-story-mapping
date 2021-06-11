@@ -8,6 +8,9 @@ mutation projectUpdate($id: ID!, $title:String!, $description:String, $activitie
             roles
             tasks {
                 title
+                subtasks {
+                    title
+                }
             }
         }
     }
