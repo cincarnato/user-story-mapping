@@ -2,18 +2,18 @@
     <v-card>
         <v-card-text>
             {{ index + 1 }}
-            <v-text-field v-model="activity.title"></v-text-field>
+            <v-text-field v-model="activity.title" solo></v-text-field>
             <list-combobox v-model="activity.roles"></list-combobox>
-            <v-row v-if="activity.tasks">
-                <v-col v-for="(task, i) in activity.tasks" :key="i">
+            <div v-if="activity.tasks" >
+                <div v-for="(task, i) in activity.tasks" :key="i" >
                     <task :task="task"></task>
-                    <!-- <v-text-field v-model="task.title">{{task.title}}</v-text-field> -->
+                </div>
+                <v-col class="flex-grow-0">
+                    <v-btn @click="addTask" icon>
+                        <v-icon>add</v-icon>
+                    </v-btn>
                 </v-col>
-            </v-row>
-            <v-btn @click="addTask">
-                <v-icon>add_task</v-icon>
-                Agregar tarea
-            </v-btn>
+            </div>
             <p>{{ activity.tasks }}</p>
         </v-card-text>
     </v-card>
@@ -55,11 +55,11 @@ export default {
             if (this.activity.tasks === null) {
                 this.activity.tasks = [];
             }
-            this.activity.tasks.push({ title: "" });
+            this.activity.tasks.push({ title: "", subtasks: [] });
         },
     },
 };
 </script>
 
-<style lang="">
+<style>
 </style>
