@@ -75,12 +75,17 @@ export default {
                 id: this.project.id,
                 title: this.project.title,
                 description: this.project.description,
-                activities: this.project.activities.map((a) => {
+                activities: this.project.activities.map((activity) => {
                     return {
-                        title: a.title,
-                        roles: a.roles,
-                        tasks: a.tasks.map((task) => {
-                            return { title: task.title };
+                        title: activity.title,
+                        roles: activity.roles,
+                        tasks: activity.tasks.map((task) => {
+                            return {
+                                title: task.title,
+                                subtasks: task.subtasks.map(subtask => {
+                                    return { title: subtask.title}
+                                })
+                            };
                         }),
                     };
                 }),

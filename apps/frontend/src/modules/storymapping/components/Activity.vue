@@ -13,7 +13,7 @@
             <v-btn @click="addTask">
                 <v-icon>add_task</v-icon>
                 Agregar tarea
-                </v-btn>
+            </v-btn>
             <p>{{ activity.tasks }}</p>
         </v-card-text>
     </v-card>
