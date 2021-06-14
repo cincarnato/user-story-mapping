@@ -1,8 +1,16 @@
 <template>
-    <v-card>
+    <v-card >
         <v-card-text>
-            {{ index + 1 }}
-            <v-text-field v-model="activity.title" placeholder="Actividad" solo class="activity"></v-text-field>
+          <v-row class="px-3">
+              <v-text-field
+                  v-model="activity.title"
+                  placeholder="Actividad"
+                  solo
+                  full-width
+                  class="activity">
+              </v-text-field>
+          </v-row>
+
             <!-- <list-combobox v-model="activity.roles" class="mb-4"></list-combobox> -->
             <div v-if="activity.tasks" class="activities">
                 <div v-for="(task, i) in activity.tasks" :key="i" >
