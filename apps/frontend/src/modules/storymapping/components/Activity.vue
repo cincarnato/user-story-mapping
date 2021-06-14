@@ -2,30 +2,27 @@
     <v-card>
         <v-card-text>
             {{ index + 1 }}
-            <v-text-field v-model="activity.title" solo></v-text-field>
-            <list-combobox v-model="activity.roles"></list-combobox>
-            <div v-if="activity.tasks" >
+            <v-text-field v-model="activity.title" placeholder="Actividad" solo class="activity"></v-text-field>
+            <!-- <list-combobox v-model="activity.roles" class="mb-4"></list-combobox> -->
+            <div v-if="activity.tasks" class="activities">
                 <div v-for="(task, i) in activity.tasks" :key="i" >
                     <task :task="task"></task>
                 </div>
-                <v-col class="flex-grow-0">
-                    <v-btn @click="addTask" icon>
-                        <v-icon>add</v-icon>
-                    </v-btn>
-                </v-col>
+                <v-btn @click="addTask" class="mt-1" fab dark small color="green accent-4">
+                    <v-icon>add</v-icon>
+                </v-btn>
             </div>
-            <p>{{ activity.tasks }}</p>
         </v-card-text>
     </v-card>
 </template>
 
 <script>
-import { ListCombobox } from "@dracul/common-frontend";
+/* import { ListCombobox } from "@dracul/common-frontend"; */
 import Task from "../components/Task";
 export default {
     name: "Activity",
     components: {
-        ListCombobox,
+        /* ListCombobox, */
         Task,
     },
     props: {
@@ -61,5 +58,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.activities {
+    display: flex;
+    flex-direction: row;
+}
+.activity {
+    border: 1px lightskyblue solid;
+    border-left-width: 10px;
+    margin-bottom: 12px;
+}
 </style>

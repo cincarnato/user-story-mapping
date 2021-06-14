@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <h1>Project page</h1>
-        {{ getProjectId }}
-        <br /><br />
-        {{ project }}
+    <v-card-text>
+        <!-- {{ getProjectId }}
+        {{ project }} -->
 
         <v-row v-if="project">
             <v-col cols="4">
@@ -30,7 +28,7 @@
                 </v-btn>
             </v-col>
         </v-row>
-        <v-row v-if="project">
+        <v-row v-if="project" class="padre">
             <v-col v-for="activity in project.activities" :key="activity.id">
                 <activity
                     :value="activity"
@@ -40,7 +38,7 @@
                 </activity>
             </v-col>
         </v-row>
-    </div>
+    </v-card-text>
 </template>
 
 <script>
@@ -107,3 +105,15 @@ export default {
     },
 };
 </script>
+
+<style>
+.v-input__slot {
+    margin-bottom: 0;
+    box-shadow: none !important;
+}
+
+.v-text-field__details {
+    display: none;
+    margin: 0;
+}
+</style>
