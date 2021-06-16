@@ -1,5 +1,6 @@
 <template>
-        <div v-if="subtask">
+        <div v-if="subtask" @mouseenter="hover = true"
+                @mouseleave="hover = false" style="position: relative">
             <v-text-field
                 v-model="subtask.title"
                 placeholder="Subtarea"
@@ -8,6 +9,17 @@
             >
                 {{ subtask.title }}
             </v-text-field>
+            <v-btn 
+                v-if="hover"
+                icon
+                @click="deleteSubtask"
+                absolute
+                right  
+                bottom
+                x-small
+                class="mr-2"
+            >
+            <v-icon>delete</v-icon></v-btn>
         </div>
 </template>
 
@@ -16,6 +28,17 @@ export default {
     name: "Subtask",
     props: {
         subtask: Object,
+        index: Number
+    },
+    data() {
+        return {
+            hover: false
+        }
+    },
+    methods: {
+        deleteSubtask() {
+            this.$emit("deleteSubtask", this.index);
+        }
     },
 };
 </script>
