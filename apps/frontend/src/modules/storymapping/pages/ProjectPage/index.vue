@@ -1,6 +1,5 @@
 <template>
     <v-card-text>
-        <!-- {{project}} -->
         <v-row v-if="project">
             <v-col cols="2">
                 <v-text-field
@@ -31,7 +30,7 @@
         </v-row>
 
         <div v-if="project" ref="scroller" class="scrollerBox">
-            <v-card class="activityBox">
+            <div class="activityBox">
                 <draggable
                     :list="project.activities"
                     @start="startDrag"
@@ -47,7 +46,6 @@
                                 :value="activity"
                                 @input="(val) => (activity = val)"
                                 :index="project.activities.indexOf(activity)"
-                                @addActivity="addActivity"
                                 @deleteActivity="deleteActivity"
                                 @startDrag="startDrag"
                                 @endDrag="endDrag"
@@ -56,16 +54,17 @@
                         </div>
                     </transition-group>
                 </draggable>
-            </v-card>
-            <!-- <v-btn
+            </div>
+            <v-btn
                 @click="addActivity"
                 fab
                 dark
                 small
-                color="blue accent-4"
+                color="#87cefa"
+                class="mt-6 ml-1 mr-2"
             >
                 <v-icon>add</v-icon>
-            </v-btn> -->
+            </v-btn>
         </div>
     </v-card-text>
 </template>
@@ -102,13 +101,10 @@ export default {
             /* this.scrollHorizontal(false) */
         },
         endDrag() {
-            /* this.scrollHorizontal(true) */
-            console.log("endDrag index");
             this.mouseDown = false;
         },
         scrollHorizontal(enable = true) {
             const slider = this.$refs.scroller;
-            //const slider = document.querySelector('.scroller');
 
             let startX, scrollLeft;
 
@@ -180,21 +176,11 @@ export default {
                 })
                 .finally(() => (this.loading = false));
         },
-        /* addActivity() {
+        addActivity() {
             if (this.project.activities === null) {
                 this.project.activities = [];
             }
             this.project.activities.push({ title: "", roles: [], tasks: [] });
-        }, */
-        addActivity(i) {
-            if (this.project.activities === null) {
-                this.project.activities = [];
-            }
-            this.project.activities.splice(i + 1, 0, {
-                title: "",
-                roles: [],
-                tasks: [],
-            });
         },
         deleteActivity(i) {
             this.project.activities.splice(i, 1);
@@ -209,19 +195,19 @@ export default {
     overflow-x: scroll; /* Just to show the div IS expanding horizontally, can delete. */
     white-space: nowrap;
     padding-bottom: 10px;
+    background-color: white;
+    height: 75vh;
 }
 .activityBox {
-    /* VER */
     min-width: auto;
     display: inline-block;
     vertical-align: top;
-    padding: 0 20px 0 10px;
+    padding: 0 10px;
 }
 .v-input__slot {
     margin-bottom: 0;
     box-shadow: none !important;
 }
-
 .v-text-field__details {
     display: none;
     margin: 0;

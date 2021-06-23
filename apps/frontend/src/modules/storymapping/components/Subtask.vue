@@ -14,28 +14,19 @@
             {{ subtask.title }}
         </v-text-field>
 
-        <div v-if="hover" class="buttonsContainer">
-            <div class="buttons">
-                <v-btn icon @click="deleteSubtask" x-small dark class="mb-1">
-                    <v-icon>delete</v-icon>
-                </v-btn>
-                <v-btn icon @click="addSubtask" x-small dark>
-                    <v-icon>add</v-icon>
-                </v-btn>
-            </div>
-        </div>
-        <!-- <v-btn 
-                v-if="hover"
-                icon
-                @click="deleteSubtask"
-                absolute
-                right  
-                bottom
-                x-small
-                class="mr-2"
-            >
-                <v-icon>delete</v-icon>
-            </v-btn> -->
+        <v-btn
+            v-if="hover"
+            icon
+            @click="deleteSubtask"
+            absolute
+            right
+            bottom
+            x-small
+            class="deleteButton"
+            color="blue-grey lighten-1"
+        >
+            <v-icon>delete</v-icon>
+        </v-btn>
     </div>
 </template>
 
@@ -52,9 +43,6 @@ export default {
         };
     },
     methods: {
-        addSubtask() {
-            this.$emit("addSubtask", this.index);
-        },
         deleteSubtask() {
             this.$emit("deleteSubtask", this.index);
         },
@@ -70,17 +58,7 @@ export default {
     margin: 0 0 0 -3px;
     padding: 0;
 }
-.buttonsContainer {
-    background-color: #78909c;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 3px 6px 0 0;
-    border-radius: 4px;
-    width: 20px;
-}
-.buttons {
-    display: flex;
-    flex-direction: column;
+.deleteButton {
+    margin-right: -5px;
 }
 </style>

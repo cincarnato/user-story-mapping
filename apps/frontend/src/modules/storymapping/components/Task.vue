@@ -13,28 +13,19 @@
             >
                 {{ task.title }}
             </v-text-field>
-            <div v-if="hover" class="buttonsContainer">
-                <div class="buttons">
-                    <v-btn icon @click="deleteTask" x-small class="mb-1">
-                        <v-icon>delete</v-icon>
-                    </v-btn>
-                    <v-btn icon @click="addTask" x-small>
-                        <v-icon>add</v-icon>
-                    </v-btn>
-                </div>
-            </div>
-            <!-- <v-btn
+            
+            <v-btn
                 v-if="hover"
-                icon
                 @click="deleteTask"
+                icon
                 absolute
                 right
                 bottom
                 x-small
-                class="mr-2"
+                color="green accent-4"
             >
                 <v-icon>delete</v-icon>
-            </v-btn> -->
+            </v-btn>
         </v-row>
 
         <v-row v-if="task.subtasks" class="flex-column">
@@ -52,7 +43,6 @@
                         <subtask
                             :subtask="subtask"
                             :index="i"
-                            @addSubtask="addSubtask"
                             @deleteSubtask="deleteSubtask"
                         >
                         </subtask>
@@ -61,16 +51,16 @@
             </draggable>
         </v-row>
 
-        <!-- <v-btn
+        <v-btn
             @click="addSubtask"
-            class="mt-3"
+            class="mt-3 ml-5"
             fab
             dark
             small
             color="blue-grey lighten-1"
         >
             <v-icon style="padding-left: 4px">playlist_add</v-icon>
-        </v-btn> -->
+        </v-btn>
     </div>
 </template>
 
@@ -94,17 +84,14 @@ export default {
         Draggable,
     },
     methods: {
-        addSubtask(i) {
+        addSubtask() {
             if (this.task.subtasks === null) {
                 this.task.subtasks = [];
             }
-            this.task.subtasks.splice(i+1, 0, { title: "" });
+            this.task.subtasks.push({ title: "" });
         },
         deleteSubtask(i) {
             this.task.subtasks.splice(i, 1);
-        },
-        addTask() {
-            this.$emit("addTask", this.index);
         },
         deleteTask() {
             this.$emit("deleteTask", this.index);
@@ -132,17 +119,13 @@ export default {
     border-left-width: 8px;
     margin: 0 8px;
 }
-.buttonsContainer {
-    background-color: #00e676;
+.deleteButton {
     position: absolute;
     top: 0;
     right: 0;
     margin: 3px 11px 0 0;
     border-radius: 4px;
-    width: 20px;
-}
-.buttons {
-    display: flex;
-    flex-direction: column;
+    width: 40px;
+    height: 44px;
 }
 </style>
