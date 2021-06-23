@@ -1,12 +1,11 @@
 <template>
-    <div v-if="task" class="contenedor">
+    <div v-if="task" class="container">
         <v-row
             @mouseenter="hover = true"
             @mouseleave="hover = false"
             style="position: relative"
         >
-            <!-- <div @click="addTaskBefore" class="button ml-1 mb-3"><p>+</p></div> -->
-            <v-text-field 
+            <v-text-field
                 v-model="task.title"
                 placeholder="Tarea"
                 solo
@@ -14,34 +13,46 @@
             >
                 {{ task.title }}
             </v-text-field>
-            <v-btn 
+            <div v-if="hover" class="buttonsContainer">
+                <div class="buttons">
+                    <v-btn icon @click="deleteTask" x-small class="mb-1">
+                        <v-icon>delete</v-icon>
+                    </v-btn>
+                    <v-btn icon @click="addTask" x-small>
+                        <v-icon>add</v-icon>
+                    </v-btn>
+                </div>
+            </div>
+            <!-- <v-btn
                 v-if="hover"
                 icon
                 @click="deleteTask"
                 absolute
-                right  
+                right
                 bottom
                 x-small
                 class="mr-2"
             >
-            <v-icon>delete</v-icon></v-btn>
+                <v-icon>delete</v-icon>
+            </v-btn> -->
         </v-row>
 
         <v-row v-if="task.subtasks" class="flex-column">
-            <draggable 
+            <draggable
                 :list="task.subtasks"
                 @start="startDragging"
                 @end="endDragging"
-                >
+            >
                 <transition-group>
                     <v-col
                         v-for="(subtask, i) in task.subtasks"
                         :key="i"
-                        style="padding: 12px 12px 0"
+                        style="padding: 10px 0 0 11px"
                     >
                         <subtask
                             :subtask="subtask"
                             :index="i"
+                            @addSubtask="addSubtask"
                             @deleteSubtask="deleteSubtask"
                         >
                         </subtask>
@@ -50,69 +61,88 @@
             </draggable>
         </v-row>
 
-        <v-btn @click="addSubtask" class="mt-3" fab dark small color="blue-grey lighten-1">
+        <!-- <v-btn
+            @click="addSubtask"
+            class="mt-3"
+            fab
+            dark
+            small
+            color="blue-grey lighten-1"
+        >
             <v-icon style="padding-left: 4px">playlist_add</v-icon>
-        </v-btn>
-
+        </v-btn> -->
     </div>
 </template>
 
 <script>
 import Subtask from "../components/Subtask";
-import Draggable from 'vuedraggable'
+import Draggable from "vuedraggable";
 
 export default {
     name: "Task",
     props: {
         task: Object,
-        index: Number
+        index: Number,
     },
     data() {
         return {
-            hover: false
-        }
+            hover: false,
+        };
     },
     components: {
         Subtask,
-        Draggable
+        Draggable,
     },
     methods: {
-        addTaskBefore() {
-            this.$emit("addTaskBefore", this.index);
-        },
-        addSubtask() {
+        addSubtask(i) {
             if (this.task.subtasks === null) {
                 this.task.subtasks = [];
             }
-            this.task.subtasks.push({ title: "" });
+            this.task.subtasks.splice(i+1, 0, { title: "" });
         },
         deleteSubtask(i) {
-            this.task.subtasks.splice(i, 1)
+            this.task.subtasks.splice(i, 1);
+        },
+        addTask() {
+            this.$emit("addTask", this.index);
         },
         deleteTask() {
             this.$emit("deleteTask", this.index);
         },
         startDragging() {
-            this.$emit('startDrag')
-            console.log("subtask StartDragging")
+            this.$emit("startDrag");
         },
         endDragging() {
-            this.$emit('endDrag')
-        }
+            this.$emit("endDrag");
+        },
     },
 };
 </script>
 
 <style scoped>
-.contenedor {
+.container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 0 0 0 16px;
 }
 .task {
-    border: 1px #00E676 solid;
+    width: 236px;
+    border: 1px #00e676 solid;
     border-left-width: 8px;
-    margin: 0 20px 0 10px;
+    margin: 0 8px;
+}
+.buttonsContainer {
+    background-color: #00e676;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 3px 11px 0 0;
+    border-radius: 4px;
+    width: 20px;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
 }
 </style>

@@ -31,35 +31,41 @@
         </v-row>
 
         <div v-if="project" ref="scroller" class="scrollerBox">
-            <div
-                v-for="activity in project.activities"
-                :key="activity.id"
-                class="activityBox"
+            <v-card class="activityBox">
+                <draggable
+                    :list="project.activities"
+                    @start="startDrag"
+                    @end="endDrag"
+                >
+                    <transition-group class="row" style="flex-wrap: nowrap">
+                        <div
+                            v-for="(activity, i) in project.activities"
+                            :key="i"
+                            class="activityBox"
+                        >
+                            <activity
+                                :value="activity"
+                                @input="(val) => (activity = val)"
+                                :index="project.activities.indexOf(activity)"
+                                @addActivity="addActivity"
+                                @deleteActivity="deleteActivity"
+                                @startDrag="startDrag"
+                                @endDrag="endDrag"
+                            >
+                            </activity>
+                        </div>
+                    </transition-group>
+                </draggable>
+            </v-card>
+            <!-- <v-btn
+                @click="addActivity"
+                fab
+                dark
+                small
+                color="blue accent-4"
             >
-                <activity
-                    :value="activity"
-                    @input="(val) => (activity = val)"
-                    :index="project.activities.indexOf(activity)"
-                    @addActivity="addActivity"
-                    @addActivityBefore="addActivityBefore"
-                    @deleteActivity="deleteActivity"
-                    @startDrag="startDrag"
-                    @endDrag="endDrag"
-                >
-                </activity>
-            </div>
-            <div class="activityBox">
-                <v-btn
-                    @click="addActivity"
-                    class="mt-6"
-                    fab
-                    dark
-                    small
-                    color="blue accent-4"
-                >
-                    <v-icon>add</v-icon>
-                </v-btn>
-            </div>
+                <v-icon>add</v-icon>
+            </v-btn> -->
         </div>
     </v-card-text>
 </template>
@@ -67,17 +73,20 @@
 <script>
 import ProjectProvider from "../../providers/ProjectProvider";
 import Activity from "../../components/Activity";
+import Draggable from "vuedraggable";
 
 export default {
     name: "ProjectPage",
     components: {
         Activity,
+        Draggable,
     },
     data() {
         return {
             project: null,
             loading: false,
-            mouseDown: false
+            mouseDown: false,
+            hover: false,
         };
     },
     computed: {
@@ -94,8 +103,8 @@ export default {
         },
         endDrag() {
             /* this.scrollHorizontal(true) */
-            console.log("endDrag index")
-            this.mouseDown = false
+            console.log("endDrag index");
+            this.mouseDown = false;
         },
         scrollHorizontal(enable = true) {
             const slider = this.$refs.scroller;
@@ -112,8 +121,7 @@ export default {
             };
 
             let stopDragging = (e) => {
-                if (e.button === 0)
-                    this.mouseDown = false;
+                if (e.button === 0) this.mouseDown = false;
             };
 
             let startMouseMove = (e) => {
@@ -123,20 +131,19 @@ export default {
                 const x = e.pageX - slider.offsetLeft;
                 const scroll = x - startX;
                 slider.scrollLeft = scrollLeft - scroll;
-            }
-            
-            if (enable) {
+            };
 
+            if (enable) {
                 slider.addEventListener("mousemove", startMouseMove);
                 slider.addEventListener("mousedown", startDragging, false);
                 slider.addEventListener("mouseup", stopDragging);
                 slider.addEventListener("mouseleave", stopDragging, false);
             } else {
-                console.log("removing listeners")
-                slider.removeEventListener("mousemove", startMouseMove)
-                slider.removeEventListener("mousedown", startDragging, false)
-                slider.removeEventListener("mouseup", stopDragging, false)
-                slider.removeEventListener("mouseleave", stopDragging, false)
+                console.log("removing listeners");
+                slider.removeEventListener("mousemove", startMouseMove);
+                slider.removeEventListener("mousedown", startDragging, false);
+                slider.removeEventListener("mouseup", stopDragging, false);
+                slider.removeEventListener("mouseleave", stopDragging, false);
             }
         },
         findProject() {
@@ -173,20 +180,24 @@ export default {
                 })
                 .finally(() => (this.loading = false));
         },
-        addActivity() {
+        /* addActivity() {
             if (this.project.activities === null) {
                 this.project.activities = [];
             }
             this.project.activities.push({ title: "", roles: [], tasks: [] });
-        },
-        addActivityBefore(index) {
+        }, */
+        addActivity(i) {
             if (this.project.activities === null) {
                 this.project.activities = [];
             }
-            this.project.activities.splice(index, 0, { title: "", roles: [], tasks: [] });
+            this.project.activities.splice(i + 1, 0, {
+                title: "",
+                roles: [],
+                tasks: [],
+            });
         },
         deleteActivity(i) {
-            this.project.activities.splice(i, 1)
+            this.project.activities.splice(i, 1);
         },
     },
 };
@@ -199,14 +210,13 @@ export default {
     white-space: nowrap;
     padding-bottom: 10px;
 }
-
 .activityBox {
-    min-width: 300px;
+    /* VER */
+    min-width: auto;
     display: inline-block;
-    margin-right: 20px;
     vertical-align: top;
+    padding: 0 20px 0 10px;
 }
-
 .v-input__slot {
     margin-bottom: 0;
     box-shadow: none !important;
