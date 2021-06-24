@@ -6,12 +6,15 @@ import {types as notificationTypes,resolvers as notificationResolvers} from '@dr
 
 //BASE RESOLVERS
 import {resolvers as baseResolvers } from './modules/base/graphql'
+import {resolvers as storymappingResolvers } from './modules/storymapping/graphql'
 //BASE TYPEDEFS
 import {types as baseTypes} from './modules/base/graphql'
+import {types as storymappingTypes} from './modules/storymapping/graphql'
 
 
 export const resolvers = mergeResolvers([
     baseResolvers,
+    storymappingResolvers,
     securityResolvers,
     notificationResolvers,
     customResolvers
@@ -19,6 +22,7 @@ export const resolvers = mergeResolvers([
 
 export const typeDefs = mergeTypes([
     baseTypes,
+    storymappingTypes,
     securityTypes,
     notificationTypes,
     customTypes

@@ -1,0 +1,18 @@
+mutation projectUpdate($id: ID!, $title:String!, $description:String, $activities:[ActivityInput]){
+    projectUpdate(id: $id, input: {title: $title, description: $description, activities: $activities }){
+        id
+        title
+        description
+        activities {
+            title
+            roles
+            tasks {
+                title
+                subtasks {
+                    title
+                }
+            }
+        }
+    }
+}
+

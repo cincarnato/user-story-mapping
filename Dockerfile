@@ -33,6 +33,8 @@ FROM node:12.16.1-alpine3.9
 RUN apk add bash
 RUN npm install pm2 -g
 
+
+
 COPY --from=builder /workspace/backend/dist /app
 COPY --from=builder /workspace/frontend/dist /app/web
 

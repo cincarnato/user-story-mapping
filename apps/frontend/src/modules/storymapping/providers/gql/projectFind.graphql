@@ -1,0 +1,17 @@
+query projectFind($id:ID!){
+    projectFind(id:$id){
+        id
+        title
+        description
+        activities {
+            title
+            roles
+            tasks {
+                title
+                subtasks {
+                    title
+                }
+            }
+        }
+    }
+}
