@@ -3,23 +3,23 @@ version: "3.5"
 services:
   draculscaffold:
     build: .
-    image: dracul-scaffold
+    image: sndregistry.sondeosglobal.com/user-story-mapping:1.0.0
     container_name: dracul_scaffold
     volumes:
       - ./media:/app/media
       - ./logs:/app/logs
     ports:
-      - "8060:5000"
+      - "8070:5000"
     environment:
       NODE_ENV: "production"
-      MONGO_URI: "mongodb://127.0.0.1:27017/dracul"
-      JWT_SECRET: "V8wzw4iL9H40oxXAVj9u"
+      MONGO_URI: "mongodb://192.168.10.70:27017/user-story-mapping"
+      JWT_SECRET: "V7wzw4iL9H40oxXAVj9u"
       JWT_LOGIN_EXPIRED_IN: "3d"
       JWT_REGISTER_EXPIRED_IN: "30d"
-      APP_NAME: "DraculScaffold"
+      APP_NAME: "UserStoryMapping"
       APP_PORT: 5000
-      APP_API_URL: "http://localhost:8060"
-      APP_WEB_URL: "http://localhost:8060"
+      APP_API_URL: "http://192.168.10.33:8070"
+      APP_WEB_URL: "http://192.168.10.33:8070"
       SMTP_HOST: "smtp.xxxx.com.ar"
       SMTP_PORT: 25
       SMTP_SECURE: "false"
