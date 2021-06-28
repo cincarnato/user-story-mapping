@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   userstorymapping:
-    image: sndregistry.sondeosglobal.com/user-story-mapping:1.0.0
+    image: sndregistry.sondeosglobal.com/user-story-mapping:1.0.1
     volumes:
       - ./media:/app/media
       - ./logs:/app/logs
