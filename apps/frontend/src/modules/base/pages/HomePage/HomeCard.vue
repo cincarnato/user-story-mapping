@@ -1,8 +1,6 @@
 <template>
     <v-col cols="12" sm="6" md="4">
-        <v-card
-
-        >
+        <v-card :to="link" >
             <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title class="headline">{{title}}</v-list-item-title>
@@ -14,15 +12,7 @@
 
             <v-card-actions class="text-center">
                 <v-spacer></v-spacer>
-                <v-btn
-                        text
-                        color="deep-purple accent-4"
-                        :to="link"
-                >
-                    Ingresar
-                </v-btn>
-
-
+                <v-btn text color="deep-purple accent-4" :to="link"> {{$t("base.enter")}}</v-btn>
             </v-card-actions>
         </v-card>
     </v-col>
@@ -34,13 +24,8 @@
         props: {
             title: String,
             subtitle: String,
-            description: String,
             img: String,
-            link: Object
+            link: String
         }
     }
 </script>
-
-<style scoped>
-
-</style>
