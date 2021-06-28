@@ -2,11 +2,17 @@
 export default [
     {
         icon: 'home',
-        text:'base.home',
+        text: 'base.home',
         link: { name: "home" },
         panel: false
     },
-
+    //AGREGAR BOTON PARA IR A .../project-management
+    {
+        icon: 'source',
+        text: 'storymapping.projects',
+        link: { name: "ProjectManagementPage" },
+        panel: false
+    },
     {
         icon: 'person',
         text: 'menu.administration',

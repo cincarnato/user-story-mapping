@@ -40,7 +40,9 @@
 
             <template v-slot:item.action="{ item }">
                 <show-button  @click="$emit('show', item)" />
-                <edit-button  @click="$emit('update', item)" />
+                <router-link :to="{ path: `project/${item.id}`}" class="editButton">
+                    <edit-button />
+                </router-link>
                 <delete-button @click="$emit('delete', item)" />
             </template>
 
@@ -110,10 +112,14 @@
                 }).catch(err => {
                     console.error(err)
                 }).finally(() => this.loading = false)
-            }
+            },
+            
         }
-        
     }
 </script>
 
-
+<style scoped>
+    a.editButton {
+        text-decoration: none;
+    }
+</style>
