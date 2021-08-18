@@ -1,0 +1,7 @@
+mutation retrospectiveProjectDelete($id: ID!){
+    retrospectiveProjectDelete(id: $id){
+        id
+        success
+    }
+}
+

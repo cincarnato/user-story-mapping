@@ -1,0 +1,7 @@
+mutation cardSaveOrUpdate($idCategory: ID!, $id: ID, $title: String!, $colour: String!) {
+  cardSaveOrUpdate(idCategory: $idCategory, cardInput: { id: $id, title: $title, colour: $colour }) {
+    id
+    title
+    colour
+  }
+}

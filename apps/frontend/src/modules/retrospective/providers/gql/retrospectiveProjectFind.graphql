@@ -1,0 +1,18 @@
+query retrospectiveProjectFind($id:ID!){
+    retrospectiveProjectFind(id:$id){
+        id
+        title
+        description
+        votesPerUser
+        categories {
+            id
+            title
+            colour
+            cards {
+                id
+                title
+                colour
+            }
+        }
+    }
+}

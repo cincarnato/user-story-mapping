@@ -6,6 +6,12 @@ export default [
         link: { name: "home" },
         panel: false
     },
+    {
+        icon: 'lightbulb',
+        text: 'retrospective.retrospectiveProject.home',
+        link: { name: "RetrospectiveProjectManagementPage" },
+        panel: false
+    },
     //AGREGAR BOTON PARA IR A .../project-management
     {
         icon: 'source',

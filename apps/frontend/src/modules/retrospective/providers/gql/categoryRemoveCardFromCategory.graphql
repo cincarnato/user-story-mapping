@@ -1,0 +1,6 @@
+mutation categoryRemoveCardFromCategory($idCategory: ID!, $idCard: ID!) {
+  categoryRemoveCardFromCategory(idCategory: $idCategory, idCard: $idCard) {
+    id
+    success
+  }
+}

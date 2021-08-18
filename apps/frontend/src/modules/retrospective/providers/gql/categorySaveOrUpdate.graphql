@@ -1,0 +1,12 @@
+mutation categorySaveOrUpdate($idRetrospectiveProject: ID!, $id: ID, $title: String!, $colour: String!, $cards: [CardInput]) {
+  categorySaveOrUpdate(idRetrospectiveProject: $idRetrospectiveProject, input: { id: $id, title: $title, colour: $colour, cards: $cards }) {
+    id
+    title
+    colour
+    cards {
+      id
+      title
+      colour
+    }
+  }
+}

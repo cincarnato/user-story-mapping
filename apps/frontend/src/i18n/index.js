@@ -4,15 +4,17 @@ import merge from 'deepmerge'
 
 import baseMessages from '../modules/base/i18n/messages'
 import storymappingMessages from '../modules/storymapping/i18n/messages'
+import retrospectiveMessages from '../modules/retrospective/i18n/messages'
 import menuMessages from '../menu-config/menu-i18n'
-import {i18nMessages as i18nMessagesCommon} from '@dracul/common-frontend'
-import {i18nMessages as i18nMessagesUser} from '@dracul/user-frontend'
-import {i18nMessages as i18nMessagesCustom} from '@dracul/customize-frontend'
-import {i18nMessages as i18nMessagesNotification} from '@dracul/notification-frontend'
+import { i18nMessages as i18nMessagesCommon } from '@dracul/common-frontend'
+import { i18nMessages as i18nMessagesUser } from '@dracul/user-frontend'
+import { i18nMessages as i18nMessagesCustom } from '@dracul/customize-frontend'
+import { i18nMessages as i18nMessagesNotification } from '@dracul/notification-frontend'
 
 const messages = merge.all([
     baseMessages,
     storymappingMessages,
+    retrospectiveMessages,
     menuMessages,
     i18nMessagesCommon,
     i18nMessagesUser,

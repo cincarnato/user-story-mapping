@@ -1,0 +1,20 @@
+mutation retrospectiveProjectUpdate($id: ID!, $title:String!, $description:String, $votesPerUser:Int!, $categories: [CategoryInput]){
+    retrospectiveProjectUpdate(id: $id, input: {title: $title, description: $description, votesPerUser: $votesPerUser, categories: $categories }){
+        id
+        title
+        description
+        votesPerUser
+        createdAt
+        categories {
+            id
+            title
+            colour
+            cards {
+                id
+                title
+                colour
+            }
+        }
+    }
+}
+

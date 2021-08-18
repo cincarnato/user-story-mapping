@@ -1,0 +1,9 @@
+mutation retrospectiveProjectCreate($title:String!, $description:String, $votesPerUser:Int!){
+    retrospectiveProjectCreate(input: {title: $title, description: $description, votesPerUser: $votesPerUser }){
+        id
+        title
+        description
+        votesPerUser
+    }
+}
+

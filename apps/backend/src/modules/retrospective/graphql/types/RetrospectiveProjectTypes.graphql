@@ -1,0 +1,74 @@
+        
+type RetrospectiveProject {
+    id: ID!
+    title: String!
+    description: String
+    votesPerUser: Int!
+    createdAt: String
+    categories: [Category]
+}
+
+type Category {
+    id: ID!
+    title: String!
+    colour: String
+    cards: [Card]
+}
+
+type Card {
+    id: ID!
+    title: String!
+    colour: String
+}
+
+type RetrospectiveProjectPaginated {
+    totalItems: Int!
+    page: Int!
+    items: [RetrospectiveProject!]
+}
+
+type Query {
+    retrospectiveProjectFind(id: ID!): RetrospectiveProject
+    retrospectiveProjectFetch: [RetrospectiveProject]
+    retrospectiveProjectPaginate( pageNumber: Int, itemsPerPage: Int, search: String, orderBy: String, orderDesc: Boolean): RetrospectiveProjectPaginated  
+}
+
+input RetrospectiveProjectInput {
+    title: String!
+    description: String
+    votesPerUser: Int!
+    categories: [CategoryInput]
+}
+
+input CategoryInput {
+    id: ID
+    title: String
+    colour: String
+    cards: [CardInput]
+}
+
+input CardInput {
+    id: ID
+    title: String
+    colour: String
+}
+
+type RetrospectiveProjectDelete {
+    id: ID!
+    success: Boolean!
+}
+
+type CategoryDelete {
+    id: ID!
+    success: Boolean!
+}
+
+type Mutation {
+    retrospectiveProjectCreate(input: RetrospectiveProjectInput): RetrospectiveProject
+    retrospectiveProjectUpdate(id: ID!, input: RetrospectiveProjectInput): RetrospectiveProject
+    retrospectiveProjectDelete(id: ID!): RetrospectiveProjectDelete!
+    categorySaveOrUpdate(idRetrospectiveProject: ID!, input: CategoryInput): Category
+    categoryDelete(id: ID!): CategoryDelete
+    cardSaveOrUpdate(idCategory: ID!, cardInput: CardInput): Card
+    categoryRemoveCardFromCategory(idCategory: ID!, idCard: ID!): RetrospectiveProjectDelete!
+}

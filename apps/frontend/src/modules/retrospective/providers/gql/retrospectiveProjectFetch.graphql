@@ -1,0 +1,9 @@
+query retrospectiveProjectFetch{
+    retrospectiveProjectFetch{
+        id
+        title
+        description
+        votesPerUser
+    }
+}
+

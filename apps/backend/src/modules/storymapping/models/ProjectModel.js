@@ -20,7 +20,6 @@ const ProjectSchema = new Schema({
         }]
     }]
 
-
 }, { timestamps: true });
 
 
